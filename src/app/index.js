@@ -2,6 +2,8 @@ const path = require('path')
 const Koa = require('koa')
 const bodyparser = require('koa-bodyparser')
 const Router = require('@koa/router')
+const cros = require('@koa/cors')
+const static = require('koa-static')
 const dotenv = require('dotenv')
 const error = require('koa-json-error')
 const requireDirectory = require('require-directory')
@@ -17,6 +19,16 @@ app.use(
 			process.env.NODE_ENV === 'production' ? rest : { stack, ...rest }
 	})
 )
+
+app.use(
+	cros({
+		origin: '*',
+		allowMethods: ['GET', 'POST', 'DELETE', 'PUT']
+	})
+)
+
+app.use(static(path.join(__dirname, '../../public')))
+
 app.use(bodyparser())
 
 requireDirectory(module, path.resolve(__dirname, '../router'), {

@@ -9,6 +9,8 @@ class ArticleController {
 		let limit = 10
 		let query = {}
 
+		console.log('ctx.query', ctx.query.tag)
+
 		if (ctx.query.skip) {
 			skip = ctx.query.skip
 		}
@@ -18,13 +20,13 @@ class ArticleController {
 		}
 
 		if (ctx.query.tag) {
-			query.tag = { $in: [ctx.query.tag] }
+			query.tagList = { $in: [ctx.query.tag] }
 		}
 
 		if (ctx.query.author) {
 			const author = await userService.getUserByName(ctx.query.author)
 			if (author) {
-				query.author = author._id
+				query.author = author._id.toString()
 			} else {
 				ctx.throw(404, { message: '用户不存在' })
 			}

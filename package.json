@@ -20,6 +20,7 @@
 		"koa": "^2.14.2",
 		"koa-bodyparser": "^4.4.1",
 		"koa-json-error": "^3.1.2",
+		"koa-static": "^5.0.0",
 		"module-alias": "^2.2.3",
 		"mongoose": "^7.5.0",
 		"require-directory": "^2.1.1",

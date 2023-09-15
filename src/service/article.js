@@ -3,6 +3,7 @@ const { User, Article, Comment } = require('@model')
 class ArticleService {
 	// get articles
 	async getArticles(skip, limit, query) {
+		console.log('service query', query)
 		return await Article.find(query).skip(skip).limit(limit).sort({ createAt: -1 })
 	}
 
